@@ -1,7 +1,7 @@
 best <- function(state, outcome) {
     # Read outcome data from the file outcome-of-care-measures.csv.
     # In the file, NAs are encoded as "Not Available".
-    tbl <- read.csv("outcome-of-care-measures.csv", na.strings = "Not Available")
+    tbl <- read.csv("outcome-of-care-measures.csv", stringsAsFactors = FALSE, na.strings = "Not Available")
 
     # Load the rows we care about into stateRows.  If we do
     # not find any rows, exit with a failure.
@@ -27,5 +27,5 @@ best <- function(state, outcome) {
     # Order the table by the mortality metric first and by name second
     orderedData <- stateRows[order(stateRows[,colName], stateRows[,"Hospital.Name"]),]
     # Return the name of the first hospital
-    orderedData[1,2]
+    orderedData[1, "Hospital.Name"]
 }
